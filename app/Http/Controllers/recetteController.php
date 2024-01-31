@@ -60,9 +60,17 @@ class recetteController extends Controller
         $recette->save();
         return redirect(route('home'))->with('success', 'Recette modifiée avec succés');
     }
-    public function deleteRecipe($id){
+    public function deleteRecipe($id)
+    {
         $recette = Recette::find($id);
         $recette->delete();
         return redirect(route('home'))->with('success', 'Recette supprimée avec succés');
     }
+    public function searchRecipe(Request $request)
+    {
+        $search_text = $request->input('query');
+        $recettes = Recette::where('titre', 'like', '%' . $search_text . '%')->get();
+        return view('home', compact('recettes', 'search_text'));
+    }
+    
 }

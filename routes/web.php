@@ -21,3 +21,4 @@ Route::post('/addRecipe', [recetteController::class, 'addRecipe'])->name('addRec
 Route::get('updtForm/{idr}', [recetteController::class, 'updtForm'])->name('updtForm');
 Route::put('/updtRecipeAction/{id}', [recetteController::class, 'updtRecipeAction'])->name('updtRecipeAction');
 Route::get('/delete/{id}', [recetteController::class, 'deleteRecipe'])->name('delete');
+Route::get('/search',  [recetteController::class,'searchRecipe'])->name('search');

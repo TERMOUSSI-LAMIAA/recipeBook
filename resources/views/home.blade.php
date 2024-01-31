@@ -10,11 +10,18 @@
 
 <body>
     <div class="container mt-5">
+        <form action="{{ route('search') }}" method="GET">
+            <input type="text" name="query" placeholder="Search...">
+            <button type="submit">Search</button>
+        </form>
         @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
         @endif
+        @if(isset($search_text))
+            @include('search')
+        @else
         <a href="{{ url('/addRecipeForm') }}" class="btn btn-success">add</a>
         @foreach($recettes as $r)
         <div class="card">
@@ -30,7 +37,7 @@
             </div>
         </div>
         @endforeach
-
+        @endif
     </div>
 
 
