@@ -24,7 +24,8 @@
         @else
         <a href="{{ url('/addRecipeForm') }}" class="btn btn-success">add</a>
         @foreach($recettes as $r)
-        <div class="card">
+      
+        <div class="card mt-3"  onclick="window.location='{{ route('details', ['id' => $r->idr]) }}';" style="cursor: pointer;">
             <img src="{{ asset('storage/'.$r->img) }}" class="card-img-top" alt="Recipe Image"
                 style="height: 200px; width: 300px;">
             <div class="card-body">

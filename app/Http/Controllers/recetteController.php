@@ -72,5 +72,12 @@ class recetteController extends Controller
         $recettes = Recette::where('titre', 'like', '%' . $search_text . '%')->get();
         return view('home', compact('recettes', 'search_text'));
     }
-    
+
+    public function showRecipeDetails($id)
+    {
+        $recette = Recette::find($id);
+
+        return view('details', compact('recette'));
+    }
+
 }

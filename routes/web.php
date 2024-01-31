@@ -15,7 +15,8 @@ use App\Http\Controllers\recetteController;
 */
 
 Route::get('/', [recetteController::class, 'showRecette'])->name('home');
-;
+Route::get('/details/{id}', [recetteController::class, 'showRecipeDetails'])->name('details');
+
 Route::get('/addRecipeForm', [recetteController::class, 'AddFormController']);
 Route::post('/addRecipe', [recetteController::class, 'addRecipe'])->name('addRecipe');
 Route::get('updtForm/{idr}', [recetteController::class, 'updtForm'])->name('updtForm');
