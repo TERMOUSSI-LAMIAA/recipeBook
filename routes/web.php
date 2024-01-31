@@ -19,4 +19,5 @@ Route::get('/', [recetteController::class, 'showRecette'])->name('home');
 Route::get('/addRecipeForm', [recetteController::class, 'AddFormController']);
 Route::post('/addRecipe', [recetteController::class, 'addRecipe'])->name('addRecipe');
 Route::get('updtForm/{idr}', [recetteController::class, 'updtForm'])->name('updtForm');
-Route::post('/updtRecipeAction', [recetteController::class, 'updtRecipeAction'])->name('updtRecipeAction');
+Route::put('/updtRecipeAction/{id}', [recetteController::class, 'updtRecipeAction'])->name('updtRecipeAction');
+Route::get('/delete/{id}', [recetteController::class, 'deleteRecipe'])->name('delete');

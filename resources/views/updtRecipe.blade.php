@@ -12,27 +12,28 @@
 
 <div class="container mt-5">
     <h2>update Recipe</h2>
-    <form action="{{ route('updtRecipeAction') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('updtRecipeAction', ['id' => $recette->idr]) }}" method="post" enctype="multipart/form-data">
     @csrf
+    @method('PUT')
 
         <div class="form-group">
             <label for="titre">Title:</label>
-            <input type="text" name="titre" value={{$recette->titre}} class="form-control" required>
+            <input type="text" name="titre" value ="{{ $recette->titre }}" class="form-control" >
         </div>
 
         <div class="form-group">
             <label for="description">Description:</label>
-            <textarea name="description" value={{$recette->description}} class="form-control" ></textarea>
+            <textarea name="description" class="form-control"  rows="3">{{$recette->description}}</textarea>
         </div>
 
         <div class="form-group">
             <label for="ingredients">Ingredients:</label>
-            <textarea name="ingredients" value={{$recette->ingredients}} class="form-control" required></textarea>
+            <textarea name="ingredients" class="form-control" rows="7"  required>{{$recette->ingredients}}</textarea>
         </div>
 
         <div class="form-group">
             <label for="instructions">Instructions:</label>
-            <textarea name="instructions" class="form-control" value={{$recette->instructions}}  required></textarea>
+            <textarea name="instructions" class="form-control" rows="4" required>{{$recette->instructions}}</textarea>
         </div>
 
         <div class="form-group">

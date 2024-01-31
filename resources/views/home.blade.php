@@ -25,7 +25,7 @@
 
                 <div class="mt-3">
                     <a href="{{url('updtForm/'.$r->idr)}}" class="btn btn-primary mr-2">Edit</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    <a href="{{route('delete', ['id' => $r->idr])}}" class="btn btn-danger">Delete</a>
                 </div>
             </div>
         </div>
