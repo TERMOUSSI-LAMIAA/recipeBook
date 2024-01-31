@@ -11,23 +11,27 @@
 <body>
     <h2>Search Results for "{{ $search_text }}"</h2>
 
-    @if($recettes && count($recettes) > 0)
-        <ul>
-            @foreach($recettes as $r)
-                <div class="card">
-                    <img src="{{ asset('storage/'.$r->img) }}" class="card-img-top" alt="Recipe Image"
-                        style="height: 200px; width: 300px;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{$r->titre}}</h5>
-
-                        <div class="mt-3">
-                            <a href="{{url('updtForm/'.$r->idr)}}" class="btn btn-primary mr-2">Edit</a>
-                            <a href="{{route('delete', ['id' => $r->idr])}}" class="btn btn-danger">Delete</a>
+    @if ($recettes && count($recettes) > 0)
+        <div class="row">
+            @foreach ($recettes as $r)
+                <div class="col-md-6 d-flex align-items-stretch" data-aos="fade-up">
+                    <div class="card" onclick="window.location='{{ route('details', ['id' => $r->idr]) }}';"
+                        style="cursor: pointer;">
+                        <div class="card-img">
+                            <img src="{{ asset('storage/' . $r->img) }}" class="card-img-top" alt="Recipe Image"
+                                style="height: 400px; width: 500px;">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $r->titre }}</h5>
+                            <p class="card-text">{{ $r->description }}</p>
+                            <div class="read-more"><a href="#"><i class="bi bi-arrow-right"></i>Voir
+                                    plus</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             @endforeach
-        </ul>
+        </div>
     @else
         <p>No results found.</p>
     @endif
