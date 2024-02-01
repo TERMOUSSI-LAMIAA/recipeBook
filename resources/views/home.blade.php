@@ -36,14 +36,14 @@
             height: 60px;
             max-width: 500;
             margin: 0 auto;
-         
+
         }
 
         .form-control {
             border-radius: 40px;
-            border-top:3px  solid #ffc107;   
-            border-bottom:3px  solid #ffc107;   
-            border-left:3px  solid #ffc107; 
+            border-top: 3px solid #ffc107;
+            border-bottom: 3px solid #ffc107;
+            border-left: 3px solid #ffc107;
         }
 
         .btn {
@@ -52,7 +52,7 @@
 
         .btn:hover {
             background-color: #99f101;
-            border: #99f101 ;
+            border: #99f101;
             /* Change the text color on hover */
         }
     </style>
@@ -69,7 +69,14 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="active " href="index.html">Accueil</a></li>
+                    @auth
+                        <li><a href="#" class="nav-link">{{ Auth::user()->email }}</a></li>
+                        <li><a href="#" class="nav-link">Logout</a></li>
+                    @else
+                        <li><a href="{{ route('login_form') }}" class="nav-link">Se connecter</a></li>
+                    @endauth
+                    <li><a href="#">Accueil</a></li>
+
                     <li><a href="{{ url('/addRecipeForm') }}">+ Recette</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>

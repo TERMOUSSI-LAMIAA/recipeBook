@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\recetteController;
+use App\Http\Controllers\userController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,6 @@ Route::get('updtForm/{idr}', [recetteController::class, 'updtForm'])->name('updt
 Route::put('/updtRecipeAction/{id}', [recetteController::class, 'updtRecipeAction'])->name('updtRecipeAction');
 Route::get('/delete/{id}', [recetteController::class, 'deleteRecipe'])->name('delete');
 Route::get('/search',  [recetteController::class,'searchRecipe'])->name('search');
+
+Route::post('/login',  [userController::class,'authenticate'])->name('login');
+Route::get('/login_form',  [userController::class,'loginForm'])->name('login_form');
