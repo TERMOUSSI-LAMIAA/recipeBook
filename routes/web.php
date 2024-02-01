@@ -27,3 +27,4 @@ Route::get('/search',  [recetteController::class,'searchRecipe'])->name('search'
 
 Route::post('/login',  [userController::class,'authenticate'])->name('login');
 Route::get('/login_form',  [userController::class,'loginForm'])->name('login_form');
+Route::get('/logout',  [userController::class,'logout'])->name('logout');

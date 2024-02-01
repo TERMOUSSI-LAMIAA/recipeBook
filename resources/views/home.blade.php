@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe-Book-Home</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbs5mQXU5TwGL5vC2kUlaKlTbIu16z9qEu9rqNGIPmHItE+3Bhysq4I2aCVJDOwD" crossorigin="anonymous">
+
+
     {{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> --}}
     <!-- Favicons -->
     <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
@@ -53,7 +58,12 @@
         .btn:hover {
             background-color: #99f101;
             border: #99f101;
-            /* Change the text color on hover */
+        }
+
+        .navbar a i ,
+        .navbar a i:hover{
+            font-size: 20px;
+            margin-right: 6px;
         }
     </style>
 </head>
@@ -70,14 +80,15 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     @auth
-                        <li><a href="#" class="nav-link">{{ Auth::user()->email }}</a></li>
-                        <li><a href="#" class="nav-link">Logout</a></li>
+                        <li><a href="#" class="nav-link"><i class="bi bi-person"></i>{{ Auth::user()->email }}</a>
+                        </li>
+                        <li><a href="{{route('logout')}}" class="nav-link"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
                     @else
-                        <li><a href="{{ route('login_form') }}" class="nav-link">Se connecter</a></li>
+                        <li><a href="{{ route('login_form') }}" class="nav-link"><i class="bi bi-person-fill"></i>Se connecter</a></li>
                     @endauth
-                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#"><i class="bi bi-house-door"></i>Accueil</a></li>
 
-                    <li><a href="{{ url('/addRecipeForm') }}">+ Recette</a></li>
+                    <li><a href="{{ url('/addRecipeForm') }}"><i class="bi bi-plus-square"></i>Recette</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
