@@ -60,8 +60,8 @@
             border: #99f101;
         }
 
-        .navbar a i ,
-        .navbar a i:hover{
+        .navbar a i,
+        .navbar a i:hover {
             font-size: 20px;
             margin-right: 6px;
         }
@@ -82,13 +82,17 @@
                     @auth
                         <li><a href="#" class="nav-link"><i class="bi bi-person"></i>{{ Auth::user()->email }}</a>
                         </li>
-                        <li><a href="{{route('logout')}}" class="nav-link"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+                        <li><a href="{{ route('logout') }}" class="nav-link"><i
+                                    class="bi bi-box-arrow-right"></i>Logout</a></li>
+                        <li><a href="{{ url('/addRecipeForm') }}"><i class="bi bi-plus-square"></i>Recette</a></li>
+                        {{-- mes recettes --}}
                     @else
-                        <li><a href="{{ route('login_form') }}" class="nav-link"><i class="bi bi-person-fill"></i>Se connecter</a></li>
+                        <li><a href="{{ route('login_form') }}" class="nav-link"><i class="bi bi-person-fill"></i>Se
+                                connecter</a></li>
                     @endauth
-                    <li><a href="#"><i class="bi bi-house-door"></i>Accueil</a></li>
+                    <li><a href="{{ route('home') }}"><i class="bi bi-house-door"></i>Accueil</a></li>
 
-                    <li><a href="{{ url('/addRecipeForm') }}"><i class="bi bi-plus-square"></i>Recette</a></li>
+
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -100,7 +104,7 @@
         <div id="heroCarousel" class="container carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
             <div class="carousel-item active">
                 <div class="carousel-container">
-                    <h2 class="animate__animated animate__fadeInDown"><span>Mon cahier de recettes</span></h2>
+                    <h2 class="animate__animated animate__fadeInDown"><span>Mon carnet de recettes</span></h2>
                     <p class="animate__animated animate__fadeInUp" style="font-weight: 900;">Inventez, partagez, régalez
                         - Votre recueil en
                         ligne,votre cuisine virtuelle.Des saveurs uniques, des expériences mémorables, tout commence
@@ -124,6 +128,10 @@
 
         <!-- ======= Service Details Section ======= -->
         <section class="service-details">
+            <div class="row">
+                <h3>mes recettes</h3>
+                {{ print_r($user->recettes) }}
+            </div>
             <div class="container">
                 @if (session('success'))
                     <div class="alert alert-success">
@@ -146,6 +154,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $r->titre }}</h5>
                                         <p class="card-text">{{ $r->description }}</p>
+                                        <p class="card-user">By: {{ $r->user->email }}</p>
                                         <div class="read-more"><a href="#"><i class="bi bi-arrow-right"></i>Voir
                                                 plus</a>
                                         </div>

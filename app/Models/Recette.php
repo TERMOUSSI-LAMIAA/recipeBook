@@ -16,7 +16,13 @@ class Recette extends Model
         'description',
         'ingredients',
         'instructions',
-        'img'
+        'img',
+        'user_id',
     ];
     public $timestamps = false;
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -31,6 +31,40 @@
             border-radius: 10px;
             box-shadow: 0px 16px 16px rgba(0, 0, 0, 0.3);
         }
+
+        form {
+            text-align: center;
+        }
+
+        .input-group {
+            width: 100%;
+            height: 60px;
+            max-width: 500;
+            margin: 0 auto;
+
+        }
+
+        .form-control {
+            border-radius: 40px;
+            border-top: 3px solid #ffc107;
+            border-bottom: 3px solid #ffc107;
+            border-left: 3px solid #ffc107;
+        }
+
+        .btn {
+            border-radius: 40px;
+        }
+
+        .btn:hover {
+            background-color: #99f101;
+            border: #99f101;
+        }
+
+        .navbar a i,
+        .navbar a i:hover {
+            font-size: 20px;
+            margin-right: 6px;
+        }
     </style>
 </head>
 
@@ -45,8 +79,20 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="active " href="index.html">Accueil</a></li>
-                    <li><a href="{{ url('/addRecipeForm') }}">+ Recette</a></li>
+                    @auth
+                        <li><a href="#" class="nav-link"><i class="bi bi-person"></i>{{ Auth::user()->email }}</a>
+                        </li>
+                        <li><a href="{{ route('logout') }}" class="nav-link"><i
+                                    class="bi bi-box-arrow-right"></i>Logout</a></li>
+                        <li><a href="{{ url('/addRecipeForm') }}"><i class="bi bi-plus-square"></i>Recette</a></li>
+                        {{-- mes recettes --}}
+                    @else
+                        <li><a href="{{ route('login_form') }}" class="nav-link"><i class="bi bi-person-fill"></i>Se
+                                connecter</a></li>
+                    @endauth
+                    <li><a href="{{ route('home') }}"><i class="bi bi-house-door"></i>Accueil</a></li>
+
+
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -71,10 +117,12 @@
                             <li><i class="bi bi-check2-circle"></i> Ingredients: {{ $recette->ingredients }}</li>
                             <li><i class="bi bi-check2-circle"></i>Instructions: {{ $recette->instructions }}</li>
                         </ul>
-                        <div>
-                            <a href="{{ url('updtForm/' . $recette->idr) }}" class="btn btn-primary mr-2">Edit</a>
-                            <a href="{{ route('delete', ['id' => $recette->idr]) }}" class="btn btn-danger">Delete</a>
-                        </div>
+                        @auth
+                            <div>
+                                <a href="{{ url('updtForm/' . $recette->idr) }}" class="btn btn-primary mr-2">Edit</a>
+                                <a href="{{ route('delete', ['id' => $recette->idr]) }}" class="btn btn-danger">Delete</a>
+                            </div>
+                        @endauth
                     </div>
                 </div>
 

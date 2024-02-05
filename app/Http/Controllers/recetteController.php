@@ -2,30 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddRecipeRequest;
+use App\Http\Resources\RecipeResource;
 use Illuminate\Http\Request;
 use App\Models\Recette;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class recetteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['showRecette', 'showRecipeDetails', 'searchRecipe']);
+    }
     public function showRecette()
     {
-        $recettes = DB::select("SELECT * FROM recette");
-        return view('home', compact('recettes'));
+        $recettes = Recette::all(); // DB::select("SELECT * FROM recette");
+        $user = Auth::user(); 
+
+        return view('home', compact('recettes', 'user'));
     }
     public function AddFormController()
     {
         return view('addRecipe');
     }
-    public function addRecipe(Request $request)
+    public function addRecipe(AddRecipeRequest $request)
     {
-        $validated = $request->validate([
-            'titre' => 'required|string|max:100',
-            'description' => 'string',
-            'ingredients' => 'required|string',
-            'instructions' => 'string',
-            'img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        $validated = $request->validated();
+        $user_id = Auth::id();
+        $validated['user_id'] = $user_id;
+
         if ($request->hasFile('img')) {
             $validated['img'] = $request->file('img')->store('imgs', 'public');
 

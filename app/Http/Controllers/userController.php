@@ -30,9 +30,10 @@ class userController extends Controller
 
         }
     }
-    public function logout(){
+    public function logout()
+    {
         Session::flush();
         Auth::logout();
-        return redirect()->route('login_form');
+        return redirect()->route('home');
     }
 }
