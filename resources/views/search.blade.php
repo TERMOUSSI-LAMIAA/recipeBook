@@ -24,6 +24,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $r->titre }}</h5>
                             <p class="card-text">{{ $r->description }}</p>
+                            <p class="card-text">Par: {{ $r->user->email }}</p>
                             <div class="read-more"><a href="#"><i class="bi bi-arrow-right"></i>Voir
                                     plus</a>
                             </div>

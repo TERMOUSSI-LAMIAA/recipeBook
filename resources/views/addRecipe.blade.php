@@ -28,28 +28,40 @@
 
 <body>
     <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top d-flex align-items-center ">
+    <header id="header" class="fixed-top d-flex align-items-center header-transparent">
         <div class="container d-flex justify-content-between align-items-center">
 
             <div class="logo">
-                <h1 class="text-light"><a href="index.html"><span>RECIPEBOOK</span></a></h1>
+                <h1 class="text-light"><a href="{{ route('home') }}"><span>RECIPEBOOK</span></a></h1>
             </div>
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="active " href="index.html">Accueil</a></li>
-                    <li><a href="{{ url('/addRecipeForm') }}">+ Recette</a></li>
+                    @auth
+                        <li><a href="#" class="nav-link"><i class="bi bi-person"></i>{{ Auth::user()->email }}</a>
+                        </li>
+                        <li><a href="{{ route('logout') }}" class="nav-link"><i
+                                    class="bi bi-box-arrow-right"></i>Logout</a></li>
+                        <li><a href="{{ url('/addRecipeForm') }}"><i class="bi bi-plus-square"></i>Recette</a></li>
+                        <li><a href="{{ route('userRecipes') }}"><i class="bi bi-book"></i>mes recettes</a></li>
+                    @else
+                        <li><a href="{{ route('login_form') }}" class="nav-link"><i class="bi bi-person-fill"></i>Se
+                                connecter</a></li>
+                    @endauth
+                    <li><a href="{{ route('home') }}"><i class="bi bi-house-door"></i>Accueil</a></li>
+
+
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
 
         </div>
-    </header>
+    </header><!-- End Header -->
     <main id="main">
         <section class="about" data-aos="fade-up">
             <div class="container mt-5 shadow p-3 mb-5 bg-white rounded">
                 <h2 class="mb-4 text-center">Ajouter Recette</h2>
-                <form action="{{ route('addRecipe') }}" method="post" enctype="multipart/form-data" >
+                <form action="{{ route('addRecipe') }}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group">

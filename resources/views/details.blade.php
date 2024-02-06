@@ -117,11 +117,15 @@
                             <li><i class="bi bi-check2-circle"></i> Ingredients: {{ $recette->ingredients }}</li>
                             <li><i class="bi bi-check2-circle"></i>Instructions: {{ $recette->instructions }}</li>
                         </ul>
+                        <p class="card-user">Par: {{ $recette->user->email }}</p>
                         @auth
-                            <div>
-                                <a href="{{ url('updtForm/' . $recette->idr) }}" class="btn btn-primary mr-2">Edit</a>
-                                <a href="{{ route('delete', ['id' => $recette->idr]) }}" class="btn btn-danger">Delete</a>
-                            </div>
+                            @if (Auth::user()->id == $recette->user->id)
+                                <div>
+                                    <a href="{{ url('updtForm/' . $recette->idr) }}" class="btn btn-primary mr-2">Edit</a>
+                                    <a href="{{ route('delete', ['id' => $recette->idr]) }}"
+                                        class="btn btn-danger">Delete</a>
+                                </div>
+                            @endif
                         @endauth
                     </div>
                 </div>
