@@ -85,7 +85,7 @@
                         <li><a href="{{ route('logout') }}" class="nav-link"><i
                                     class="bi bi-box-arrow-right"></i>Logout</a></li>
                         <li><a href="{{ url('/addRecipeForm') }}"><i class="bi bi-plus-square"></i>Recette</a></li>
-                        <li><a href="{{ route('userRecipes') }}"><i class="bi bi-book"></i>mes recettes</a></li>
+                        <li><a href="{{ route('userRecipes') }}">mes recettes</a></li>
                     @else
                         <li><a href="{{ route('login_form') }}" class="nav-link"><i class="bi bi-person-fill"></i>Se
                                 connecter</a></li>
@@ -104,66 +104,42 @@
         <div id="heroCarousel" class="container carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
             <div class="carousel-item active">
                 <div class="carousel-container">
-                    <h2 class="animate__animated animate__fadeInDown"><span>Mon carnet de recettes</span></h2>
-                    <p class="animate__animated animate__fadeInUp" style="font-weight: 900;">Inventez, partagez, régalez
-                        - Votre recueil en
-                        ligne,votre cuisine virtuelle.Des saveurs uniques, des expériences mémorables, tout commence
-                        ici, sur votre propre site de recettes.</p>
+                    <h2 class="animate__animated animate__fadeInDown"><span>Mes recettes</span></h2>
                 </div>
             </div>
 
         </div>
     </section><!-- End Hero -->
-    <main id="main">
-        <form action="{{ route('search') }}" method="GET" class="d-flex align-items-center my-3">
-            <div class="input-group w-50 mx-auto">
-                <input type="text" name="query" class="form-control" placeholder="Search..." aria-label="Search"
-                    aria-describedby="search-addon">
-                <button type="submit" class="btn btn-warning" id="search-addon">
-                    <i class="bi bi-search"></i> Search
-                </button>
-            </div>
-        </form>
-
-
-        <!-- ======= Service Details Section ======= -->
-        <section class="service-details">
-            <div class="container">
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                @if (isset($search_text))
-                    @include('search')
-                @else
-                    <div class="row">
-                        @foreach ($recettes as $r)
-                            <div class="col-md-6 d-flex align-items-stretch" data-aos="fade-up">
-                                <div class="card"
-                                    onclick="window.location='{{ route('details', ['id' => $r->idr]) }}';"
-                                    style="cursor: pointer;">
-                                    <div class="card-img">
-                                        <img src="{{ asset('storage/' . $r->img) }}" class="card-img-top"
-                                            alt="Recipe Image" style="height: 400px; width: 500px;">
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $r->titre }}</h5>
-                                        <p class="card-text">{{ $r->description }}</p>
-                                        <p class="card-user">By: {{ $r->user->email }}</p>
-                                        <div class="read-more"><a href="#"><i class="bi bi-arrow-right">
-                                                </i>Voir plus</a>
-                                        </div>
+    <section class="service-details">
+        <div class="container">
+            @if ($user->recettes && count($user->recettes) > 0)
+                <div class="row">
+                    @foreach ($user->recettes as $r)
+                        <div class="col-md-6 d-flex align-items-stretch" data-aos="fade-up">
+                            <div class="card" onclick="window.location='{{ route('details', ['id' => $r->idr]) }}';"
+                                style="cursor: pointer;">
+                                <div class="card-img">
+                                    <img src="{{ asset('storage/' . $r->img) }}" class="card-img-top"
+                                        alt="Recipe Image" style="height: 400px; width: 500px;">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $r->titre }}</h5>
+                                    <p class="card-text">{{ $r->description }}</p>
+                                    <p class="card-user">By: {{ $r->user->email }}</p>
+                                    <div class="read-more"><a href="#"><i class="bi bi-arrow-right"></i>Voir
+                                            plus</a>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
-                @endif
-        </section><!-- End Service Details Section -->
-    </main>
-    <!-- End #main -->
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <p>No recipes found for this user.</p>
+            @endif
 
+        </div>
+    </section><!-- End Service Details Section -->
     <!-- ======= Footer ======= -->
     <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
         <div class="footer-top">
@@ -238,7 +214,6 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
-
 </body>
 
 </html>

@@ -23,8 +23,9 @@ Route::post('/addRecipe', [recetteController::class, 'addRecipe'])->name('addRec
 Route::get('updtForm/{idr}', [recetteController::class, 'updtForm'])->name('updtForm');
 Route::put('/updtRecipeAction/{id}', [recetteController::class, 'updtRecipeAction'])->name('updtRecipeAction');
 Route::get('/delete/{id}', [recetteController::class, 'deleteRecipe'])->name('delete');
-Route::get('/search',  [recetteController::class,'searchRecipe'])->name('search');
+Route::get('/search', [recetteController::class, 'searchRecipe'])->name('search');
+Route::get('/userRecipes', [recetteController::class, 'userRecipes'])->name('userRecipes');
 
-Route::post('/login',  [userController::class,'authenticate'])->name('login');
-Route::get('/login_form',  [userController::class,'loginForm'])->name('login_form');
-Route::get('/logout',  [userController::class,'logout'])->name('logout');
+Route::post('/login', [userController::class, 'authenticate'])->name('login');
+Route::get('/login_form', [userController::class, 'loginForm'])->name('login_form');
+Route::get('/logout', [userController::class, 'logout'])->name('logout');

@@ -19,9 +19,9 @@ class recetteController extends Controller
     public function showRecette()
     {
         $recettes = Recette::all(); // DB::select("SELECT * FROM recette");
-        $user = Auth::user(); 
+      
 
-        return view('home', compact('recettes', 'user'));
+        return view('home', compact('recettes'));
     }
     public function AddFormController()
     {
@@ -85,6 +85,14 @@ class recetteController extends Controller
         $recette = Recette::find($id);
 
         return view('details', compact('recette'));
+    }
+
+    public function userRecipes(Request $request)
+    {
+        $user = Auth::user(); 
+
+        $mesrecettes = Recette::all();
+        return view('user_recette', compact('mesrecettes', 'user'));
     }
 
 }
